@@ -14,6 +14,7 @@ struct Customer
         queueNumber=number;
         this->name=name;
         arrivetime=time(nullptr);
+        endtime=0;
     }
     Customer()
     {
@@ -21,6 +22,7 @@ struct Customer
         queueNumber = 0;
         name = "";
         arrivetime = 0;
+        endtime=0;
     }
 
     

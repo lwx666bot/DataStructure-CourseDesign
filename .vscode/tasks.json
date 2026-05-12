@@ -4,22 +4,51 @@
         {
             "type": "shell",
             "label": "build-all-cpp",
-            "command": "C:\\mingw64\\bin\\g++.exe",
+            "command": "g++",
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
-                "${workspaceFolder}\\main.cpp",
-                "${workspaceFolder}\\Menu.cpp",
-                "${workspaceFolder}\\QueueSystem.cpp",
+                "${workspaceFolder}/main.cpp",
+                "${workspaceFolder}/Menu.cpp",
+                "${workspaceFolder}/QueueSystem.cpp",
                 "-o",
-                "${workspaceFolder}\\main.exe"
+                "${workspaceFolder}/main"
             ],
             "options": {
-                "shell": {
-                    "executable": "C:\\Windows\\System32\\cmd.exe",
-                    "args": ["/c"]
-                },
                 "cwd": "${workspaceFolder}"
+            },
+            "windows": {
+                "command": "C:\\mingw64\\bin\\g++.exe",
+                "args": [
+                    "-fdiagnostics-color=always",
+                    "-g",
+                    "${workspaceFolder}/main.cpp",
+                    "${workspaceFolder}/Menu.cpp",
+                    "${workspaceFolder}/QueueSystem.cpp",
+                    "-o",
+                    "${workspaceFolder}/main.exe"
+                ],
+                "options": {
+                    "shell": {
+                        "executable": "C:\\Windows\\System32\\cmd.exe",
+                        "args": [
+                            "/c"
+                        ]
+                    },
+                    "cwd": "${workspaceFolder}"
+                }
+            },
+            "osx": {
+                "command": "g++",
+                "args": [
+                    "-fdiagnostics-color=always",
+                    "-g",
+                    "${workspaceFolder}/main.cpp",
+                    "${workspaceFolder}/Menu.cpp",
+                    "${workspaceFolder}/QueueSystem.cpp",
+                    "-o",
+                    "${workspaceFolder}/main"
+                ]
             },
             "problemMatcher": [
                 "$gcc"

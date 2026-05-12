@@ -5,14 +5,22 @@
             "name": "编译并运行整个C++项目",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}\\main.exe",
+            "program": "${workspaceFolder}/main",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
             "externalConsole": true,
-            "MIMode": "gdb",
-            "miDebuggerPath": "C:\\mingw64\\bin\\gdb.exe",
+            "MIMode": "lldb",
+            "windows": {
+                "program": "${workspaceFolder}/main.exe",
+                "MIMode": "gdb",
+                "miDebuggerPath": "C:\\mingw64\\bin\\gdb.exe"
+            },
+            "osx": {
+                "program": "${workspaceFolder}/main",
+                "MIMode": "lldb"
+            },
             "preLaunchTask": "build-all-cpp"
         }
     ]

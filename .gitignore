@@ -1,0 +1,22 @@
+# Ignore everything by default.
+*
+
+# Keep directories visible so Git can find allowed files inside them.
+!*/
+
+# Keep this ignore rule in the repository.
+!/.gitignore
+
+# Project documentation.
+!README.md
+!**/README.md
+
+# Source files.
+!*.cpp
+!*.h
+!**/*.cpp
+!**/*.h
+
+# VS Code project configuration.
+!.vscode/
+!.vscode/**

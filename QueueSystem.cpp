@@ -5,6 +5,18 @@
 #include<iomanip>
 #include<sstream>
 using namespace std;
+//时间转换
+string timeToString(time_t t)
+{
+    if (t == 0)
+    {
+        return "未记录";
+    }
+    tm* localTime = localtime(&t);
+    stringstream ss;
+    ss << put_time(localTime, "%Y-%m-%d %H:%M:%S");
+    return ss.str();
+}
 
 bool QueueSystem::empty(){
     return front==rear;
@@ -37,7 +49,7 @@ void QueueSystem:: addCustomer(){
         cout<<"姓名："<<a.name<<endl;
         cout<<"ID："<<a.customerID<<endl;
         cout<<"序号："<<a.queueNumber<<endl;
-        cout<<"入队时间："<<a.arrivetime;
+        cout<<"入队时间："<<timeToString(a.arrivetime);//🤣
     }
     else cout<<"入队失败";
 }
@@ -100,6 +112,7 @@ void QueueSystem::CancelCall(){
     a=stk.top();
     stk.pop();
     push(a);
+    a.endtime=0;
     cout<<"撤销叫号成功";
 }
 
