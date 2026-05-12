@@ -1,0 +1,217 @@
+#include <iostream>
+#include<cstdlib>
+using namespace std;
+void queueMenu();
+void calculatorMenu();
+
+void printCalculatorMenu()
+{
+    system("cls");//清空终端
+    cout << endl;
+    cout << "========================================" << endl;
+    cout << "             表达式计算器系统" << endl;
+    cout << "========================================" << endl;
+    cout << "1. 输入中缀表达式" << endl;
+    cout << "2. 中缀表达式转后缀表达式" << endl;
+    cout << "3. 计算后缀表达式" << endl;
+    cout << "4. 直接计算表达式结果" << endl;
+    cout << "5. 查看表达式计算过程" << endl;
+    cout << "6. 清空当前表达式" << endl;
+    cout << "0. 返回主菜单" << endl;
+    cout << "========================================" << endl;
+    cout << "请输入你的选择：";
+}
+
+void printQueueMenu()
+{
+    system("cls");//清空终端
+    cout << endl;
+    cout << "========================================" << endl;
+    cout << "              排队叫号系统" << endl;
+    cout << "========================================" << endl;
+    cout << "1. 顾客取号排队" << endl;
+    cout << "2. 窗口叫号服务" << endl;
+    cout << "3. 查看当前排队情况" << endl;
+    cout << "4. 查询顾客信息" << endl;
+    cout << "5. 过号处理" << endl;
+    cout << "6. 查看历史服务记录" << endl;
+    cout << "7. 保存数据到文件" << endl;
+    cout << "8. 从文件读取数据" << endl;
+    cout << "0. 返回主菜单" << endl;
+    cout << "========================================" << endl;
+    cout << "请输入你的选择：";
+}
+
+void printMainMenu(){
+    system("cls");//清空终端
+    cout<<"=====数据结构课程设计系统====="<<endl;
+          cout<<"1,校园餐厅排队叫号模拟系统" <<endl;
+         cout<< "2,表达式计算器"<<endl;
+          cout<<"0,退出系统"<<endl;
+          cout<<"请输入选项"<<endl;
+}
+
+void mainMenu(){
+     int choice;
+    while(true){
+        printMainMenu();
+        cin>>choice;
+        switch(choice){
+            case 0:{
+                cout<<"退出系统...";
+                return;
+                break;
+            }
+            case 1:{
+                //进入队列叫号二级菜单，进行排队模拟相关操作
+                queueMenu();
+                break;
+            }
+            case 2:{
+                //进入表达式计算器二级菜单，进行表达式计算器相关操作
+                calculatorMenu();
+                break;
+            }
+            default:{
+                cout<<"无效输入，重新选择。。。"<<endl;break;
+            }
+            
+        }
+    }
+}
+
+void queueMenu()
+{
+    int queuechoice;
+
+    while (true)
+    {
+        printQueueMenu();
+        cin >> queuechoice;
+
+        switch (queuechoice)
+        {
+            case 0:
+            {
+                cout << "返回主菜单..." << endl;
+                return;
+            }
+
+            case 1:
+            {
+                // 顾客取号排队
+                break;
+            }
+
+            case 2:
+            {
+                // 窗口叫号服务
+                break;
+            }
+
+            case 3:
+            {
+                // 查看当前排队情况
+                break;
+            }
+
+            case 4:
+            {
+                // 查询顾客信息
+                break;
+            }
+
+            case 5:
+            {
+                // 过号处理
+                break;
+            }
+
+            case 6:
+            {
+                // 查看历史服务记录
+                break;
+            }
+
+            case 7:
+            {
+                // 保存数据到文件
+                break;
+            }
+
+            case 8:
+            {
+                // 从文件读取数据
+                break;
+            }
+
+            default:
+            {
+                cout << "无效输入，请重新选择..." << endl;
+                break;
+            }
+        }
+    }
+}
+
+void calculatorMenu()
+{
+    int calculatorchoice;
+
+    while (true)
+    {
+        printCalculatorMenu();
+        cin >> calculatorchoice;
+
+        switch (calculatorchoice)
+        {
+            case 0:
+            {
+                cout << "返回主菜单..." << endl;
+                return;
+            }
+
+            case 1:
+            {
+                // 输入中缀表达式
+                break;
+            }
+
+            case 2:
+            {
+                // 中缀表达式转后缀表达式
+                break;
+            }
+
+            case 3:
+            {
+                // 计算后缀表达式
+                break;
+            }
+
+            case 4:
+            {
+                // 直接计算表达式结果
+                break;
+            }
+
+            case 5:
+            {
+                // 查看表达式计算过程
+                break;
+            }
+
+            case 6:
+            {
+                // 清空当前表达式
+                break;
+            }
+
+            default:
+            {
+                cout << "无效输入，请重新选择..." << endl;
+                break;
+            }
+        }
+    }
+}
