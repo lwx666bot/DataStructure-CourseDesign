@@ -80,11 +80,11 @@ void QueueSystem::callCustomer(){
     a.endtime=time(nullptr);
     cout<<"叫号成功"<<endl;
     cout<<"姓名："<<a.name<<endl;
-    cout<<"ID："<<a.customerID<<endl;
+    cout<<"ID:"<<a.customerID<<endl;
     cout<<"序号："<<a.queueNumber<<endl;
-    cout<<"入队时间："<<a.arrivetime;
-    cout<<"叫号（出队）时间"<<a.endtime;
-    cout<<"等待时间（s）:"<<endl;
+    cout<<"入队时间："<<timeToString(a.arrivetime)<<endl;
+    cout<<"叫号(出队)时间:"<<timeToString(a.endtime)<<endl;
+    cout<<"等待时间(s):"<<endl;
     cout<<a.endtime-a.arrivetime;
 }
 
@@ -95,9 +95,9 @@ void QueueSystem::DispQueue(){
     for(int i=0;i<length;i++){
         Getfront(a);
          cout<<"姓名："<<a.name<<endl;
-        cout<<"ID："<<a.customerID<<endl;
+        cout<<"ID:"<<a.customerID<<endl;
         cout<<"序号："<<a.queueNumber<<endl;
-        cout<<"等待时间:"<<currentTime-a.arrivetime<<endl;
+        cout<<"等待时间(s):"<<currentTime-a.arrivetime<<endl;
         pop();
         push(a);
     }
