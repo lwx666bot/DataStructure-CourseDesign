@@ -2,7 +2,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "运行整个C++项目（外部CMD）",
+            "name": "编译并运行整个C++项目",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}\\main.exe",
@@ -10,7 +10,7 @@
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
-            "externalConsole": true,          // ✅ 使用外部 CMD 窗口
+            "externalConsole": true,
             "MIMode": "gdb",
             "miDebuggerPath": "C:\\mingw64\\bin\\gdb.exe",
             "preLaunchTask": "build-all-cpp"

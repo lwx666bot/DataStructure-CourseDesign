@@ -1,7 +1,39 @@
 #include <iostream>
 #include<cstdlib>
-using namespace std;
-void queueMenu();
+#include<limits>
+#include"Menu.h"
+#include"QueueSystem.h"
+using namespace std;    
+
+//用于暂停终端，显示信息
+void pauseScreen(){
+    cout<<endl;
+    system("pause");
+}
+
+ int getMenuChoice()
+{
+    int choice;
+
+    while (true)
+    {
+        cin >> choice;
+
+        if (cin.fail())
+        {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+            cout << "输入错误，请输入数字：";
+            continue;
+        }
+
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        return choice;
+    }
+}
+
+void queueMenu(QueueSystem&qu);
 void calculatorMenu();
 
 void printCalculatorMenu()
@@ -32,7 +64,7 @@ void printQueueMenu()
     cout << "1. 顾客取号排队" << endl;
     cout << "2. 窗口叫号服务" << endl;
     cout << "3. 查看当前排队情况" << endl;
-    cout << "4. 查询顾客信息" << endl;
+    cout << "4. 撤销叫号" << endl;
     cout << "5. 过号处理" << endl;
     cout << "6. 查看历史服务记录" << endl;
     cout << "7. 保存数据到文件" << endl;
@@ -53,9 +85,10 @@ void printMainMenu(){
 
 void mainMenu(){
      int choice;
+     QueueSystem qu;
     while(true){
         printMainMenu();
-        cin>>choice;
+        choice = getMenuChoice();
         switch(choice){
             case 0:{
                 cout<<"退出系统...";
@@ -64,7 +97,7 @@ void mainMenu(){
             }
             case 1:{
                 //进入队列叫号二级菜单，进行排队模拟相关操作
-                queueMenu();
+                queueMenu(qu);
                 break;
             }
             case 2:{
@@ -80,14 +113,14 @@ void mainMenu(){
     }
 }
 
-void queueMenu()
+void queueMenu(QueueSystem&qu)
 {
     int queuechoice;
 
     while (true)
     {
         printQueueMenu();
-        cin >> queuechoice;
+        queuechoice = getMenuChoice();
 
         switch (queuechoice)
         {
@@ -100,24 +133,32 @@ void queueMenu()
             case 1:
             {
                 // 顾客取号排队
+                qu.addCustomer();
+                pauseScreen();
                 break;
             }
 
             case 2:
             {
                 // 窗口叫号服务
+                qu.callCustomer();
+                pauseScreen();
                 break;
             }
 
             case 3:
             {
                 // 查看当前排队情况
+                qu.DispQueue();
+                pauseScreen();
                 break;
             }
 
             case 4:
             {
-                // 查询顾客信息
+                // 撤销叫号
+                qu.CancelCall();
+                pauseScreen();
                 break;
             }
 
@@ -161,7 +202,7 @@ void calculatorMenu()
     while (true)
     {
         printCalculatorMenu();
-        cin >> calculatorchoice;
+        calculatorchoice = getMenuChoice();
 
         switch (calculatorchoice)
         {
@@ -215,3 +256,4 @@ void calculatorMenu()
         }
     }
 }
+

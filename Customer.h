@@ -1,0 +1,30 @@
+#ifndef CUSTOMER_H
+#define CUSTOMER_H
+#include<string>
+#include<ctime>
+struct Customer
+{
+    int customerID;//顾客ID，标识身份
+    int queueNumber;//排队号码
+    std::string name;//顾客名称
+    time_t arrivetime;//记录入队时间
+    time_t endtime;//记录叫号（出队）时间
+    Customer(int ID,int number,std::string name){
+        customerID=ID;
+        queueNumber=number;
+        this->name=name;
+        arrivetime=time(nullptr);
+    }
+    Customer()
+    {
+        customerID = 0;
+        queueNumber = 0;
+        name = "";
+        arrivetime = 0;
+    }
+
+    
+};
+
+
+#endif

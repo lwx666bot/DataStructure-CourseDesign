@@ -1,8 +1,8 @@
 #ifndef MENU_H
 #define MENU_H
-
+#include"QueueSystem.h"
 void mainMenu();
-void queueMenu();
+void queueMenu(QueueSystem&qu);
 void calculatorMenu();
 
 void printMainMenu();
