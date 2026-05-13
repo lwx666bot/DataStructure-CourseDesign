@@ -20,14 +20,19 @@ class QueueSystem{//循环队列类
     vector<Customer>historyRecords;
     int AutoCustomerID;//给顾客ID赋值用  
     int AutoQueueNumber;//叫号数
+    string historyFileName;//历史信息记录文件名称
+    string createHistoryFileName();//生成本次运行程序的历史信息记录文件名称
     public:
     QueueSystem(){
         CustomerQueue=new Customer [MaxSize];
         length=front=rear=0;
         AutoCustomerID=1001;
         AutoQueueNumber=1;
+        historyFileName=createHistoryFileName();
     }
-    ~QueueSystem(){delete []CustomerQueue;}
+    ~QueueSystem(){
+        delete []CustomerQueue;
+    }
     bool empty();//队空判断
     int Getlength();//求队列长度
     bool push(Customer& e);//入队
@@ -40,5 +45,7 @@ class QueueSystem{//循环队列类
     void ClearQueue();//清空等待队列
     void DispHistory();//历史信息查看
     void showSystem();//系统信息
+    void SaveHistoryToFile();//保存信息到文件中
+    bool hasHistoryRecords();//判断是否有队列信息产生
 };
 #endif

@@ -89,7 +89,13 @@ void mainMenu(){
         printMainMenu();
         choice = getMenuChoice();
         switch(choice){
-            case 0:{
+            case 0:{//这里自动保存退出系统时，已经存储的信息
+                if(qu.hasHistoryRecords()){
+                    qu.SaveHistoryToFile();
+                    cout<<"退出系统前，信息已自动保存"<<endl;
+                }else{
+                    cout<<"本次运行无排队历史记录，无需保存"<<endl;
+                }
                 cout<<"退出系统...";
                 return;
                 break;
@@ -186,7 +192,9 @@ void queueMenu(QueueSystem&qu)
 
             case 8:
             {
-                // 从文件读取数据
+                //记录数据到文件中
+                qu.SaveHistoryToFile();
+                pauseScreen();
                 break;
             }
 

@@ -3,9 +3,11 @@
 #include <ctime>
 #include <iomanip>
 #include <sstream>
+#include<fstream>
 #include "QueueSystem.h"
 using namespace std;
 //时间转换函数
+//将时间戳转成年月日时分秒string类型
 string timeToString(time_t t)
 {
     if (t == 0)
@@ -188,6 +190,7 @@ void QueueSystem::DispHistory(){
         cout<<"---------------------------------------------"<<endl;
     }
 }
+
 void QueueSystem::showSystem(){
     int canceledCount = 0;
 
@@ -196,56 +199,74 @@ void QueueSystem::showSystem(){
             canceledCount++;
         }
     }
-
     double capacityUsageRate = length * 100.0 / (MaxSize - 1);
 
     double queueCongestionIndex =
         length * 0.6 + capacityUsageRate * 0.4;
-
-    string congestionLevel;
-
-    if(queueCongestionIndex < 5){
-        congestionLevel = "空闲";
-    }
-    else if(queueCongestionIndex < 10){
-        congestionLevel = "正常";
-    }
-    else if(queueCongestionIndex < 20){
-        congestionLevel = "较拥堵";
-    }
-    else{
-        congestionLevel = "严重拥堵";
-    }
-
-    string peakStatus;
-
-    if(length >= 10 || capacityUsageRate >= 70){
-        peakStatus = "当前可能处于高峰期";
-    }
-    else{
-        peakStatus = "当前未处于高峰期";
-    }
-
     cout << "========== 系统当前状态 ==========" << endl;
     cout << "本次总取号人数：" << historyRecords.size() << endl;
     cout << "当前等待人数：" << length << endl;
     cout << "服务已完成人数：" << stk.size() << endl;
     cout << "清空队列取消人数：" << canceledCount << endl;
     cout << "----------------------------------" << endl;
-
     cout << fixed << setprecision(2);
     cout << "队列容量使用率：" << capacityUsageRate << "%" << endl;
     cout << "排队拥堵指数：" << queueCongestionIndex << endl;
-    cout << "系统负载等级：" << congestionLevel << endl;
-    cout << "高峰状态判断：" << peakStatus << endl;
-
     cout << "==================================" << endl;
 }
 
+string QueueSystem::createHistoryFileName(){
+    time_t now = time(nullptr);
+    tm* localTime = localtime(&now);
+    stringstream ss;
+    ss << put_time(localTime, "HistoryRecords/history_%Y-%m-%d_%H-%M-%S.txt");//这里也可以修改后缀为csv，输出更像表格的形式
+    return ss.str();
+}
 
+void QueueSystem::SaveHistoryToFile()
+{
+    ofstream fout(historyFileName);
 
+    if(!fout.is_open())
+    {
+        cout << "历史信息保存失败，文件无法打开！" << endl;
+        cout << "请检查项目目录下是否已经创建 HistoryRecords 文件夹。" << endl;
+        return;
+    }
+    fout << "顾客ID,姓名,排队号码,入队时间,叫号时间,当前状态,等待时间(s)" << endl;
+    double AllTime=0;
+    for(int i = 0; i < historyRecords.size(); i++)
+    {
+        Customer c = historyRecords[i];
+        if(c.CustomerStatus=="已完成"){
+            AllTime=AllTime+(c.endtime-c.arrivetime);
+        }
+        fout << c.customerID << ",";//前面如果保存成csv文件，这里“，”可以分隔不同列
+        fout << c.name << ",";
+        fout << c.queueNumber << ",";
+        fout << timeToString(c.arrivetime) << ",";
+        fout << timeToString(c.endtime) << ",";
+        fout << c.CustomerStatus << ",";
 
+        if(c.CustomerStatus == "已完成" || c.CustomerStatus == "已取消")
+        {
+            fout << c.endtime - c.arrivetime;
+        }
+        else
+        {
+            fout << "尚未完成";
+        }
 
+        fout << endl;
+    }
+    double averageTime=AllTime/stk.size();
+    fout<<"平均等待时间:"<<averageTime;
+    fout.close();
 
+    cout << "历史信息已保存到文件：" << historyFileName << endl;
+}
 
+bool QueueSystem::hasHistoryRecords(){
+    return historyRecords.size()>0;
+}
 
