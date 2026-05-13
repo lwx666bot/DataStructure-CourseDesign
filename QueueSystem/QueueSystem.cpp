@@ -3,7 +3,7 @@
 #include <ctime>
 #include <iomanip>
 #include <sstream>
-#include<fstream>
+#include<fstream> 
 #include "QueueSystem.h"
 using namespace std;
 //时间转换函数
@@ -29,8 +29,10 @@ int QueueSystem::Getlength(){
 }
 
 bool QueueSystem::push(Customer& e){
-    if((rear+1)%MaxSize==front)
+    if((rear+1)%MaxSize==front){
+        cout<<"队满，不能入队";
         return false;
+    }
     rear=(rear+1)%MaxSize;
     CustomerQueue[rear]=e;
     length++;
@@ -123,13 +125,12 @@ void QueueSystem::CancelCall(){
     }
     Customer a;
     a=stk.top();
-    stk.pop();
     int search=a.queueNumber-1;
     if(search<0||search>=historyRecords.size()){
          cout<<"历史记录中未找到该顾客";
         cout<<"叫号失败";
         return;
-    }
+    }else{stk.pop();}
     historyRecords[search].endtime=0;
     historyRecords[search].CustomerStatus="排队中";
     a.endtime=0;

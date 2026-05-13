@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <limits>
 #include "Menu.h"
+#include "../QueueSystem/QueueSystem.h"
 using namespace std;    
 
 //用于暂停终端，显示信息
