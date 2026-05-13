@@ -180,7 +180,7 @@ void QueueSystem::DispHistory(){
             cout<<"等待时间(s)："<<c.endtime - c.arrivetime<<endl;
         }
         else if(c.CustomerStatus=="已取消"){
-            cout<<"等待时间(s):"<<c.endtime-c.arrivetime<<"队列清空导致取消"<<endl;
+            cout<<"等待时间(s):"<<c.endtime-c.arrivetime<<"  队列清空导致取消"<<endl;
         }
         else {
             cout<<"等待时间(s)：尚未完成叫号"<<endl;
@@ -190,9 +190,20 @@ void QueueSystem::DispHistory(){
 }
 
 void QueueSystem::showSystem(){
-    cout<<"本次已服务人数:"<<historyRecords.size()<<endl;
-    cout<<"当前正在服务人数:"<<length<<endl;
-    cout<<"服务已完成人数:"<<stk.size()<<endl;
+    int canceledCount = 0;
+
+    for(int i = 0; i < historyRecords.size(); i++){
+        if(historyRecords[i].CustomerStatus == "已取消"){
+            canceledCount++;
+        }
+    }  
+
+    cout << "========== 系统当前状态 ==========" << endl;
+    cout << "本次总取号人数：" << historyRecords.size() << endl;
+    cout << "当前等待人数：" << length << endl;
+    cout << "服务已完成人数：" << stk.size() << endl;
+    cout << "清空队列取消人数：" << canceledCount << endl;
+    cout << "==================================" << endl;
 }
 
 
