@@ -259,8 +259,12 @@ void QueueSystem::SaveHistoryToFile()
 
         fout << endl;
     }
-    double averageTime=AllTime/stk.size();
-    fout<<"平均等待时间:"<<averageTime;
+    if(stk.size()>0){
+        double averageTime=AllTime/stk.size();
+        fout<<"平均等待时间:"<<averageTime;
+    }else{
+        cout<<"平均等待时间：无";
+    }
     fout.close();
 
     cout << "历史信息已保存到文件：" << historyFileName << endl;
