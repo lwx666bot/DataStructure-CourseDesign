@@ -3,7 +3,7 @@
 #include <ctime>
 #include <iomanip>
 #include <sstream>
-#include<fstream>
+#include <fstream>
 #include "QueueSystem.h"
 using namespace std;
 //时间转换函数
@@ -128,13 +128,12 @@ void QueueSystem::CancelCall(){
     }
     Customer a;
     a=stk.top();
-    stk.pop();
     int search=a.queueNumber-1;
     if(search<0||search>=historyRecords.size()){
          cout<<"历史记录中未找到该顾客";
         cout<<"叫号失败";
         return;
-    }
+    }else{stk.pop();}
     historyRecords[search].endtime=0;
     historyRecords[search].CustomerStatus="排队中";
     a.endtime=0;
@@ -204,8 +203,9 @@ void QueueSystem::showSystem(){
             canceledCount++;
         }
     }
-    double queueCongestionIndex = length * 100.0 / (MaxSize - 1);
-    //这里使用总在排队人数除以队列总容量衡量拥堵指数
+    double capacityUsageRate = length * 100.0 / (MaxSize - 1);
+    double queueCongestionIndex = length * 0.6 + capacityUsageRate * 0.4;
+    //同时参考当前等待人数和容量使用率衡量拥堵程度
     cout << "========== 系统当前状态 ==========" << endl;
     cout << "本次总取号人数：" << historyRecords.size() << endl;
     cout << "当前等待人数：" << length << endl;
@@ -213,6 +213,7 @@ void QueueSystem::showSystem(){
     cout << "清空队列取消人数：" << canceledCount << endl;
     cout << "----------------------------------" << endl;
     cout << fixed << setprecision(2);
+    cout << "队列容量使用率：" << capacityUsageRate << "%" << endl;
     cout << "排队拥堵指数：" << queueCongestionIndex << endl;
     cout << "==================================" << endl;
 }
