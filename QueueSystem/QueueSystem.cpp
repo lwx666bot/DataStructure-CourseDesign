@@ -12,33 +12,38 @@ string timeToString(time_t t)
 {
     if (t == 0)
     {
-        return "未记录";
+        return "未记录";//初始化和撤销叫号，endtime都会赋值为 0
     }
-    tm* localTime = localtime(&t);
+    tm* localTime = localtime(&t);//tm 结构体
     stringstream ss;
-    ss << put_time(localTime, "%Y-%m-%d %H:%M:%S");
+    ss << put_time(localTime, "%Y-%m-%d %H:%M:%S");//拼接成一个 string 类型
     return ss.str();
 }
-
+//判断队列是否为空
 bool QueueSystem::empty(){
     return front==rear;
 }
-
+//返回队列长度
 int QueueSystem::Getlength(){
     return length;
 }
-
+//入队
 bool QueueSystem::push(Customer& e){
-    if((rear+1)%MaxSize==front)
+    if((rear+1)%MaxSize==front){
+        cout<<"队列已满";
         return false;
+    }
     rear=(rear+1)%MaxSize;
     CustomerQueue[rear]=e;
     length++;
     return true;
 }
-
+//出队
 bool QueueSystem::pop(){
-    if(empty())return false;
+    if(empty()){
+        cout<<"队空";
+        return false;
+    }
     front=(front+1)%MaxSize;
     length--;
     return true;
@@ -199,10 +204,8 @@ void QueueSystem::showSystem(){
             canceledCount++;
         }
     }
-    double capacityUsageRate = length * 100.0 / (MaxSize - 1);
-
-    double queueCongestionIndex =
-        length * 0.6 + capacityUsageRate * 0.4;
+    double queueCongestionIndex = length * 100.0 / (MaxSize - 1);
+    //这里使用总在排队人数除以队列总容量衡量拥堵指数
     cout << "========== 系统当前状态 ==========" << endl;
     cout << "本次总取号人数：" << historyRecords.size() << endl;
     cout << "当前等待人数：" << length << endl;
@@ -210,7 +213,6 @@ void QueueSystem::showSystem(){
     cout << "清空队列取消人数：" << canceledCount << endl;
     cout << "----------------------------------" << endl;
     cout << fixed << setprecision(2);
-    cout << "队列容量使用率：" << capacityUsageRate << "%" << endl;
     cout << "排队拥堵指数：" << queueCongestionIndex << endl;
     cout << "==================================" << endl;
 }
@@ -219,13 +221,14 @@ string QueueSystem::createHistoryFileName(){
     time_t now = time(nullptr);
     tm* localTime = localtime(&now);
     stringstream ss;
-    ss << put_time(localTime, "HistoryRecords/history_%Y-%m-%d_%H-%M-%S.txt");//这里也可以修改后缀为csv，输出更像表格的形式
+    ss << put_time(localTime, "HistoryRecords/history_%Y-%m-%d_%H-%M-%S.csv");
+    //这里也可以修改后缀为csv，输出更像表格的csv文件
     return ss.str();
 }
 
 void QueueSystem::SaveHistoryToFile()
 {
-    ofstream fout(historyFileName);
+    ofstream fout(historyFileName, ios::out | ios::binary);
 
     if(!fout.is_open())
     {
@@ -233,6 +236,7 @@ void QueueSystem::SaveHistoryToFile()
         cout << "请检查项目目录下是否已经创建 HistoryRecords 文件夹。" << endl;
         return;
     }
+    fout << "\xEF\xBB\xBF";
     fout << "顾客ID,姓名,排队号码,入队时间,叫号时间,当前状态,等待时间(s)" << endl;
     double AllTime=0;
     for(int i = 0; i < historyRecords.size(); i++)
@@ -261,9 +265,9 @@ void QueueSystem::SaveHistoryToFile()
     }
     if(stk.size()>0){
         double averageTime=AllTime/stk.size();
-        fout<<"平均等待时间:"<<averageTime;
+        fout<<"平均等待时间:"<<","<<averageTime;
     }else{
-        cout<<"平均等待时间：无";
+        fout<<"平均等待时间：无";
     }
     fout.close();
 
@@ -273,4 +277,3 @@ void QueueSystem::SaveHistoryToFile()
 bool QueueSystem::hasHistoryRecords(){
     return historyRecords.size()>0;
 }
-

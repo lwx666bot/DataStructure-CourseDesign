@@ -13,7 +13,7 @@ struct Customer
     //time_t 获取从1970-01-01 00：00：00到当前时刻走过的秒数 
     time_t endtime;//记录叫号（出队）时间
     std::string CustomerStatus;//；记录顾客状态，如“排队中”“已完成”等，并且凭此统计信息
-    Customer(int ID,int number,std::string name){
+    Customer(int ID,int number,std::string &name){
         customerID=ID;
         queueNumber=number;
         this->name=name;

@@ -67,7 +67,7 @@ void printQueueMenu()
     cout << "5. 清空队列" << endl;
     cout << "6. 查看历史服务记录" << endl;
     cout << "7. 查看系统状态" << endl;
-    cout << "8. 从文件读取数据" << endl;
+    cout << "8. 存储信息到文本文件中" << endl;
     cout << "0. 返回主菜单" << endl;
     cout << "========================================" << endl;
     cout << "请输入你的选择：";

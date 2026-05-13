@@ -1,5 +1,7 @@
 #ifndef QUEUESYSTEM_H
 #define QUEUESYSTEM_H
+#include <iostream>
+#include <string>
 #include<vector>
 #include <stack>
 #include "../Customer/Customer.h"
@@ -9,20 +11,22 @@ const int MaxSize=100;
 class QueueSystem{//循环队列类
     private:
     Customer* CustomerQueue;//储存队列
-    int front;//队头，队非空时，指向队头前一个元素
+    int front;//队头，队非空时，指向队头前一个元素，实际存储空间 MaxSize-1
     int rear;//队尾，队非空时，指向队尾元素
     int length;//队列长度
-    stack<Customer> stk;//栈用来处理撤销叫号
+    stack<Customer> stk;//栈用来处理撤销叫号，同时表示已经完成的顾客
     /*vector<Customer>historyRecords
     历史信息统计，
     包括所有曾经入队顾客，
     顾客结构体中用 status 记录*/
     vector<Customer>historyRecords;
     int AutoCustomerID;//给顾客ID赋值用  
-    int AutoQueueNumber;//叫号数
+    int AutoQueueNumber;//排队序号数
     string historyFileName;//历史信息记录文件名称
     string createHistoryFileName();//生成本次运行程序的历史信息记录文件名称
     public:
+    //构造函数，初始化队列
+    //historyFileName=createHistoryFileName();用本次开始运行的时间作为记录
     QueueSystem(){
         CustomerQueue=new Customer [MaxSize];
         length=front=rear=0;
@@ -31,6 +35,7 @@ class QueueSystem{//循环队列类
         historyFileName=createHistoryFileName();
     }
     ~QueueSystem(){
+        cout<<"系统已销毁";
         delete []CustomerQueue;
     }
     bool empty();//队空判断
