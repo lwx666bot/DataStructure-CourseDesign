@@ -188,7 +188,6 @@ void QueueSystem::DispHistory(){
         cout<<"---------------------------------------------"<<endl;
     }
 }
-
 void QueueSystem::showSystem(){
     int canceledCount = 0;
 
@@ -196,17 +195,52 @@ void QueueSystem::showSystem(){
         if(historyRecords[i].CustomerStatus == "已取消"){
             canceledCount++;
         }
-    }  
+    }
+
+    double capacityUsageRate = length * 100.0 / (MaxSize - 1);
+
+    double queueCongestionIndex =
+        length * 0.6 + capacityUsageRate * 0.4;
+
+    string congestionLevel;
+
+    if(queueCongestionIndex < 5){
+        congestionLevel = "空闲";
+    }
+    else if(queueCongestionIndex < 10){
+        congestionLevel = "正常";
+    }
+    else if(queueCongestionIndex < 20){
+        congestionLevel = "较拥堵";
+    }
+    else{
+        congestionLevel = "严重拥堵";
+    }
+
+    string peakStatus;
+
+    if(length >= 10 || capacityUsageRate >= 70){
+        peakStatus = "当前可能处于高峰期";
+    }
+    else{
+        peakStatus = "当前未处于高峰期";
+    }
 
     cout << "========== 系统当前状态 ==========" << endl;
     cout << "本次总取号人数：" << historyRecords.size() << endl;
     cout << "当前等待人数：" << length << endl;
     cout << "服务已完成人数：" << stk.size() << endl;
     cout << "清空队列取消人数：" << canceledCount << endl;
+    cout << "----------------------------------" << endl;
+
+    cout << fixed << setprecision(2);
+    cout << "队列容量使用率：" << capacityUsageRate << "%" << endl;
+    cout << "排队拥堵指数：" << queueCongestionIndex << endl;
+    cout << "系统负载等级：" << congestionLevel << endl;
+    cout << "高峰状态判断：" << peakStatus << endl;
+
     cout << "==================================" << endl;
 }
-
-
 
 
 
