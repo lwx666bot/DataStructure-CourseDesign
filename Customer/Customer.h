@@ -11,7 +11,7 @@ struct Customer
     std::string name;//顾客名称
     time_t arrivetime;//记录入队时间
     time_t endtime;//记录叫号（出队）时间
-    std::string CustomerStatus;
+    std::string CustomerStatus;//；记录顾客状态，如“排队中”“已完成”等，并且凭此统计信息
     Customer(int ID,int number,std::string name){
         customerID=ID;
         queueNumber=number;

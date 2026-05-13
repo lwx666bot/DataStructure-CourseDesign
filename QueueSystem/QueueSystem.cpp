@@ -35,30 +35,31 @@ bool QueueSystem::push(Customer& e){
     return true;
 }
 
-void QueueSystem:: addCustomer(){
-    string str;
-    cout<<"请输入顾客姓名(输入-1取消本次叫号排队)"<<endl;
-    cin>>str;
-    if(str=="-1")return;
-    Customer a(nextCustomerID,nextQueueNumber,str);
-    bool flag=push(a);
-    nextCustomerID++;
-    nextQueueNumber++;
-    if(flag){
-        cout<<"入队成功"<<endl;
-        cout<<"姓名："<<a.name<<endl;
-        cout<<"ID："<<a.customerID<<endl;
-        cout<<"序号："<<a.queueNumber<<endl;
-        cout<<"入队时间："<<timeToString(a.arrivetime);//🤣
-    }
-    else cout<<"入队失败";
-}
-
 bool QueueSystem::pop(){
     if(empty())return false;
     front=(front+1)%MaxSize;
     length--;
     return true;
+}
+
+void QueueSystem:: addCustomer(){
+    string str;
+    cout<<"请输入顾客姓名(输入-1取消本次排队)"<<endl;
+    cin>>str;
+    if(str=="-1")return;
+    Customer a(AutoCustomerID,AutoQueueNumber,str); 
+    bool flag=push(a);
+    if(flag){
+        AutoCustomerID++;
+        AutoQueueNumber++;
+        historyRecords.push_back(a);
+        cout<<"入队成功"<<endl;
+        cout<<"姓名："<<a.name<<endl;
+        cout<<"ID:"<<a.customerID<<endl;
+        cout<<"序号："<<a.queueNumber<<endl;
+        cout<<"入队时间："<<timeToString(a.arrivetime);//
+    }
+    else cout<<"入队失败";
 }
 
 bool QueueSystem::Getfront(Customer&e){
@@ -75,9 +76,16 @@ void QueueSystem::callCustomer(){
     }
     Customer a;
     Getfront(a);
+    int search=a.queueNumber-1;
+    if(search<0||search>=historyRecords.size()){
+        cout<<"历史记录中未找到该顾客";
+        cout<<"叫号失败";
+        return;
+    }
     pop();
-    a.endtime=time(nullptr);
-    a.CustomerStatus="已完成";
+    historyRecords[search].endtime=a.endtime=time(nullptr);
+    historyRecords[search].CustomerStatus= a.CustomerStatus="已完成";
+
     stk.push(a);
     cout<<"叫号成功"<<endl;
     cout<<"姓名："<<a.name<<endl;
@@ -98,7 +106,7 @@ void QueueSystem::DispQueue(){
         cout<<"姓名："<<a.name<<" ";
         cout<<"ID:"<<a.customerID<<" ";
         cout<<"序号："<<a.queueNumber<<" ";
-        cout<<a.CustomerStatus<<" ";
+        cout<<"状态:"<<a.CustomerStatus<<" ";
         cout<<"等待时间(s):"<<currentTime-a.arrivetime<<endl;
         cout<<endl;
         pop();
@@ -114,6 +122,14 @@ void QueueSystem::CancelCall(){
     Customer a;
     a=stk.top();
     stk.pop();
+    int search=a.queueNumber-1;
+    if(search<0||search>=historyRecords.size()){
+         cout<<"历史记录中未找到该顾客";
+        cout<<"叫号失败";
+        return;
+    }
+    historyRecords[search].endtime=0;
+    historyRecords[search].CustomerStatus="排队中";
     a.endtime=0;
     a.CustomerStatus="排队中";
     push(a);
@@ -128,10 +144,63 @@ void QueueSystem::ClearQueue(){
     cin>>str1;
     if(str1=="yes"){
         while(!empty()){
+            Customer a;
+            Getfront(a);
+            int search =a.queueNumber-1;
+            if(search>=0&&search<historyRecords.size()){
+                historyRecords[search].CustomerStatus="已取消";
+                historyRecords[search].endtime=time(nullptr);
+            }
             pop();
         }
         cout<<"队列已清空"<<endl;
     }else return;
 
 }
+
+void QueueSystem::DispHistory(){
+    if(historyRecords.empty()){
+        cout<<"暂无历史服务记录"<<endl;
+        return;
+    }
+
+    cout<<"================ 历史服务记录 ================"<<endl;
+
+    for(int i = 0; i < historyRecords.size(); i++){
+        Customer c = historyRecords[i];
+
+        cout<<"姓名："<<c.name<<endl;
+        cout<<"ID："<<c.customerID<<endl;
+        cout<<"排队号码："<<c.queueNumber<<endl;
+        cout<<"入队时间："<<timeToString(c.arrivetime)<<endl;
+        cout<<"叫号时间："<<timeToString(c.endtime)<<endl;
+        cout<<"当前状态："<<c.CustomerStatus<<endl;
+
+        if(c.CustomerStatus == "已完成"){
+            cout<<"等待时间(s)："<<c.endtime - c.arrivetime<<endl;
+        }
+        else if(c.CustomerStatus=="已取消"){
+            cout<<"等待时间(s):"<<c.endtime-c.arrivetime<<"队列清空导致取消"<<endl;
+        }
+        else {
+            cout<<"等待时间(s)：尚未完成叫号"<<endl;
+        }
+        cout<<"---------------------------------------------"<<endl;
+    }
+}
+
+void QueueSystem::showSystem(){
+    cout<<"本次已服务人数:"<<historyRecords.size()<<endl;
+    cout<<"当前正在服务人数:"<<length<<endl;
+    cout<<"服务已完成人数:"<<stk.size()<<endl;
+}
+
+
+
+
+
+
+
+
+
 

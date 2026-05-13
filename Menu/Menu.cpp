@@ -66,7 +66,7 @@ void printQueueMenu()
     cout << "4. 撤销叫号" << endl;
     cout << "5. 清空队列" << endl;
     cout << "6. 查看历史服务记录" << endl;
-    cout << "7. 保存数据到文件" << endl;
+    cout << "7. 查看系统状态" << endl;
     cout << "8. 从文件读取数据" << endl;
     cout << "0. 返回主菜单" << endl;
     cout << "========================================" << endl;
@@ -172,12 +172,15 @@ void queueMenu(QueueSystem&qu)
             case 6:
             {
                 // 查看历史服务记录
+                qu.DispHistory();
+                pauseScreen();
                 break;
             }
-
             case 7:
             {
-                // 保存数据到文件
+                // 查看系统状态
+                qu.showSystem();
+                pauseScreen();
                 break;
             }
 

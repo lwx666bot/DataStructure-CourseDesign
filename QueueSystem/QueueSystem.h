@@ -13,18 +13,19 @@ class QueueSystem{//循环队列类
     int rear;//队尾，队非空时，指向队尾元素
     int length;//队列长度
     stack<Customer> stk;//栈用来处理撤销叫号
-    /*历史信息统计，
+    /*vector<Customer>historyRecords
+    历史信息统计，
     包括所有曾经入队顾客，
     顾客结构体中用 status 记录*/
     vector<Customer>historyRecords;
-    int nextCustomerID;//给顾客ID赋值用
-    int nextQueueNumber;//叫号数
+    int AutoCustomerID;//给顾客ID赋值用  
+    int AutoQueueNumber;//叫号数
     public:
     QueueSystem(){
         CustomerQueue=new Customer [MaxSize];
         length=front=rear=0;
-        nextCustomerID=1001;
-        nextQueueNumber=1;
+        AutoCustomerID=1001;
+        AutoQueueNumber=1;
     }
     ~QueueSystem(){delete []CustomerQueue;}
     bool empty();//队空判断
@@ -37,5 +38,7 @@ class QueueSystem{//循环队列类
     void DispQueue();//查看当前排队队列
     void CancelCall();//撤销叫号
     void ClearQueue();//清空等待队列
+    void DispHistory();//历史信息查看
+    void showSystem();//系统信息
 };
 #endif
