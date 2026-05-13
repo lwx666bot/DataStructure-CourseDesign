@@ -95,10 +95,10 @@ void QueueSystem::DispQueue(){
     time_t currentTime=time(nullptr);
     for(int i=0;i<length;i++){
         Getfront(a);
-        cout<<"姓名："<<a.name<<endl;
-        cout<<"ID:"<<a.customerID<<endl;
-        cout<<"序号："<<a.queueNumber<<endl;
-        cout<<a.CustomerStatus<<endl;
+        cout<<"姓名："<<a.name<<" ";
+        cout<<"ID:"<<a.customerID<<" ";
+        cout<<"序号："<<a.queueNumber<<" ";
+        cout<<a.CustomerStatus<<" ";
         cout<<"等待时间(s):"<<currentTime-a.arrivetime<<endl;
         cout<<endl;
         pop();
