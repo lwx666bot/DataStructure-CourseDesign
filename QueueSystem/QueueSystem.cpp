@@ -1,11 +1,11 @@
-#include<iostream>
-#include"QueueSystem.h"
-#include<string>
-#include<ctime>
-#include<iomanip>
-#include<sstream>
+#include <iostream>
+#include <string>
+#include <ctime>
+#include <iomanip>
+#include <sstream>
+#include "QueueSystem.h"
 using namespace std;
-//时间转换
+//时间转换函数
 string timeToString(time_t t)
 {
     if (t == 0)
@@ -76,8 +76,9 @@ void QueueSystem::callCustomer(){
     Customer a;
     Getfront(a);
     pop();
-    stk.push(a);
     a.endtime=time(nullptr);
+    a.CustomerStatus="已完成";
+    stk.push(a);
     cout<<"叫号成功"<<endl;
     cout<<"姓名："<<a.name<<endl;
     cout<<"ID:"<<a.customerID<<endl;
@@ -94,10 +95,12 @@ void QueueSystem::DispQueue(){
     time_t currentTime=time(nullptr);
     for(int i=0;i<length;i++){
         Getfront(a);
-         cout<<"姓名："<<a.name<<endl;
+        cout<<"姓名："<<a.name<<endl;
         cout<<"ID:"<<a.customerID<<endl;
         cout<<"序号："<<a.queueNumber<<endl;
+        cout<<a.CustomerStatus<<endl;
         cout<<"等待时间(s):"<<currentTime-a.arrivetime<<endl;
+        cout<<endl;
         pop();
         push(a);
     }
@@ -111,13 +114,24 @@ void QueueSystem::CancelCall(){
     Customer a;
     a=stk.top();
     stk.pop();
-    push(a);
     a.endtime=0;
+    a.CustomerStatus="排队中";
+    push(a);
     cout<<"撤销叫号成功";
+    cout<<"顾客"<<a.name<<"已重新入队";
 }
 
+void QueueSystem::ClearQueue(){
+    cout<<"即将清空队列"<<endl;
+    cout<<"输入 yes 确认"<<endl;
+    string str1;
+    cin>>str1;
+    if(str1=="yes"){
+        while(!empty()){
+            pop();
+        }
+        cout<<"队列已清空"<<endl;
+    }else return;
 
-
-
-
+}
 

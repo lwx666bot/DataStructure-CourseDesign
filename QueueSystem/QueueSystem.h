@@ -1,7 +1,9 @@
 #ifndef QUEUESYSTEM_H
 #define QUEUESYSTEM_H
-#include<stack>
-#include"Customer.h"
+#include<vector>
+#include <stack>
+#include "../Customer/Customer.h"
+
 using namespace std;
 const int MaxSize=100;
 class QueueSystem{//循环队列类
@@ -10,9 +12,13 @@ class QueueSystem{//循环队列类
     int front;//队头，队非空时，指向队头前一个元素
     int rear;//队尾，队非空时，指向队尾元素
     int length;//队列长度
+    stack<Customer> stk;//栈用来处理撤销叫号
+    /*历史信息统计，
+    包括所有曾经入队顾客，
+    顾客结构体中用 status 记录*/
+    vector<Customer>historyRecords;
     int nextCustomerID;//给顾客ID赋值用
     int nextQueueNumber;//叫号数
-    stack<Customer> stk;
     public:
     QueueSystem(){
         CustomerQueue=new Customer [MaxSize];
@@ -29,6 +35,7 @@ class QueueSystem{//循环队列类
     bool Getfront(Customer&e);//取队头
     void callCustomer();//叫号
     void DispQueue();//查看当前排队队列
-    void CancelCall();
+    void CancelCall();//撤销叫号
+    void ClearQueue();//清空等待队列
 };
 #endif

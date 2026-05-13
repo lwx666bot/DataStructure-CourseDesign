@@ -1,8 +1,7 @@
 #include <iostream>
-#include<cstdlib>
-#include<limits>
-#include"Menu.h"
-#include"QueueSystem.h"
+#include <cstdlib>
+#include <limits>
+#include "Menu.h"
 using namespace std;    
 
 //用于暂停终端，显示信息
@@ -10,7 +9,7 @@ void pauseScreen(){
     cout<<endl;
     system("pause");
 }
-
+//限制只能输入数字
  int getMenuChoice()
 {
     int choice;
@@ -65,7 +64,7 @@ void printQueueMenu()
     cout << "2. 窗口叫号服务" << endl;
     cout << "3. 查看当前排队情况" << endl;
     cout << "4. 撤销叫号" << endl;
-    cout << "5. 过号处理" << endl;
+    cout << "5. 清空队列" << endl;
     cout << "6. 查看历史服务记录" << endl;
     cout << "7. 保存数据到文件" << endl;
     cout << "8. 从文件读取数据" << endl;
@@ -164,7 +163,9 @@ void queueMenu(QueueSystem&qu)
 
             case 5:
             {
-                // 过号处理
+                // 清空等待队列
+                qu.ClearQueue();
+                pauseScreen();
                 break;
             }
 
@@ -256,4 +257,3 @@ void calculatorMenu()
         }
     }
 }
-

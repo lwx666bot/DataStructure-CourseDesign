@@ -1,6 +1,4 @@
-#include <iostream>
-#include"Menu.h"
-#include"QueueSystem.h"
+#include "Menu/Menu.h"
 using namespace std;
 int main(){
     mainMenu();

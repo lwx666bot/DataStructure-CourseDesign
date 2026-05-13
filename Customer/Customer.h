@@ -1,7 +1,9 @@
 #ifndef CUSTOMER_H
 #define CUSTOMER_H
-#include<string>
-#include<ctime>
+
+#include <string>
+#include <ctime>
+
 struct Customer
 {
     int customerID;//顾客ID，标识身份
@@ -9,12 +11,14 @@ struct Customer
     std::string name;//顾客名称
     time_t arrivetime;//记录入队时间
     time_t endtime;//记录叫号（出队）时间
+    std::string CustomerStatus;
     Customer(int ID,int number,std::string name){
         customerID=ID;
         queueNumber=number;
         this->name=name;
         arrivetime=time(nullptr);
         endtime=0;
+        CustomerStatus="排队中";
     }
     Customer()
     {
@@ -23,6 +27,7 @@ struct Customer
         name = "";
         arrivetime = 0;
         endtime=0;
+        CustomerStatus="未初始化";
     }
 
     
