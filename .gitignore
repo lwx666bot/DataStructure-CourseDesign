@@ -17,6 +17,9 @@
 !**/*.cpp
 !**/*.h
 
+# Keep runtime data directories available after cloning.
+!RestaurantQueueSystem/HistoryRecords/.gitkeep
+
 # VS Code project configuration.
 !.vscode/
 !.vscode/**
