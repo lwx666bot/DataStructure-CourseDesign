@@ -12,6 +12,7 @@ class ExpressionCalculator{
     string preExpr;//前缀表达式
 
     double result;
+    public:
     ExpressionCalculator(){
         infixExpr="";
         postExpr="";
@@ -19,9 +20,10 @@ class ExpressionCalculator{
         result=0;
     }
     ~ExpressionCalculator(){}
+    bool setExpression(const string&str);
     void inputExpression();
     void inputFromKeyboard();
-    void inputFronFile();
+    void inputFromFile();
 };
 
 #endif

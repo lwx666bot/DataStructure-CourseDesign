@@ -3,6 +3,7 @@
 #include <limits>
 #include "Menu.h"
 #include "../../RestaurantQueueSystem/QueueSystem/QueueSystem.h"
+#include"../ExpressionCalculatorSystem/ExpressionCalculator/ExpressionCalculator.h"
 using namespace std;    
 
 //用于暂停终端，显示信息
@@ -86,6 +87,7 @@ void printMainMenu(){
 void mainMenu(){
      int choice;
      QueueSystem qu;
+    ExpressionCalculator expr;
     while(true){
         printMainMenu();
         choice = getMenuChoice();
@@ -228,6 +230,7 @@ void calculatorMenu()
             case 1:
             {
                 // 输入中缀表达式
+
                 break;
             }
 
