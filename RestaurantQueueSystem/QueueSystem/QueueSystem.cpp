@@ -51,9 +51,9 @@ bool QueueSystem::pop(){
 
 void QueueSystem:: addCustomer(){
     string str;
-    cout<<"请输入顾客姓名(输入-1取消本次排队)"<<endl;
+    cout<<"请输入顾客姓名(输入“cancel“取消本次排队)"<<endl;
     cin>>str;
-    if(str=="-1")return;
+    if(str=="cancel")return;
     Customer a(AutoCustomerID,AutoQueueNumber,str); 
     bool flag=push(a);
     if(flag){

@@ -3,10 +3,14 @@
         {
             "name": "Mac",
             "includePath": [
-                "${workspaceFolder}/Main1",
+                "${workspaceFolder}/Main",
+                "${workspaceFolder}/Main/Menu",
                 "${workspaceFolder}/RestaurantQueueSystem",
                 "${workspaceFolder}/RestaurantQueueSystem/Customer",
-                "${workspaceFolder}/RestaurantQueueSystem/QueueSystem"
+                "${workspaceFolder}/RestaurantQueueSystem/QueueSystem",
+                "${workspaceFolder}/ExpressionCalculatorSystem",
+                "${workspaceFolder}/ExpressionCalculatorSystem/ExpressionCalculator",
+                "${workspaceFolder}/ExpressionCalculatorSystem/ExpressionTree"
             ],
             "defines": [],
             "macFrameworkPath": [
@@ -19,10 +23,14 @@
         {
             "name": "Win32",
             "includePath": [
-                "${workspaceFolder}/Main1",
+                "${workspaceFolder}/Main",
+                "${workspaceFolder}/Main/Menu",
                 "${workspaceFolder}/RestaurantQueueSystem",
                 "${workspaceFolder}/RestaurantQueueSystem/Customer",
-                "${workspaceFolder}/RestaurantQueueSystem/QueueSystem"
+                "${workspaceFolder}/RestaurantQueueSystem/QueueSystem",
+                "${workspaceFolder}/ExpressionCalculatorSystem",
+                "${workspaceFolder}/ExpressionCalculatorSystem/ExpressionCalculator",
+                "${workspaceFolder}/ExpressionCalculatorSystem/ExpressionTree"
             ],
             "defines": [],
             "compilerPath": "C:/mingw64/bin/g++.exe",
