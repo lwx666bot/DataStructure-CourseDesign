@@ -21,7 +21,7 @@
                 "program": "${workspaceFolder}/build/main",
                 "MIMode": "lldb"
             },
-            "preLaunchTask": "C/C++: clang++ 生成整个项目"
+            "preLaunchTask": "C/C++: g++ 生成整个项目"
         }
     ]
 }

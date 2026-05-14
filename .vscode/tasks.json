@@ -20,25 +20,29 @@
         },
         {
             "type": "cppbuild",
-            "label": "C/C++: clang++ 生成整个项目",
-            "command": "/usr/bin/clang++",
+            "label": "C/C++: g++ 生成整个项目",
+            "command": "g++",
             "dependsOn": "prepare-build-dir",
             "args": [
-                "-fcolor-diagnostics",
-                "-fansi-escape-codes",
+                "-fdiagnostics-color=always",
                 "-std=c++17",
                 "-g",
                 "-I${workspaceFolder}/Main",
+                "-I${workspaceFolder}/Main/Function",
                 "-I${workspaceFolder}/RestaurantQueueSystem",
                 "-I${workspaceFolder}/ExpressionCalculatorSystem",
                 "${workspaceFolder}/Main/main.cpp",
+                "${workspaceFolder}/Main/Function/Function.cpp",
                 "${workspaceFolder}/Main/Menu/Menu.cpp",
                 "${workspaceFolder}/RestaurantQueueSystem/QueueSystem/QueueSystem.cpp",
                 "${workspaceFolder}/ExpressionCalculatorSystem/ExpressionTree/ExpressionTree.cpp",
                 "${workspaceFolder}/ExpressionCalculatorSystem/ExpressionCalculator/ExpressionCalculator.cpp",
                 "-o",
-                "${workspaceFolder}/build/main"
+                "${workspaceFolder}/build/main.exe"
             ],
+            "windows": {
+                "command": "C:\\mingw64\\bin\\g++.exe"
+            },
             "options": {
                 "cwd": "${workspaceFolder}"
             },
@@ -49,7 +53,7 @@
                 "kind": "build",
                 "isDefault": true
             },
-            "detail": "使用 clang++ 编译整个课程设计项目。"
+            "detail": "使用 g++ 编译整个课程设计项目。"
         },
         {
             "type": "shell",
@@ -61,9 +65,11 @@
                 "-std=c++17",
                 "-g",
                 "-I${workspaceFolder}/Main",
+                "-I${workspaceFolder}/Main/Function",
                 "-I${workspaceFolder}/RestaurantQueueSystem",
                 "-I${workspaceFolder}/ExpressionCalculatorSystem",
                 "${workspaceFolder}/Main/main.cpp",
+                "${workspaceFolder}/Main/Function/Function.cpp",
                 "${workspaceFolder}/Main/Menu/Menu.cpp",
                 "${workspaceFolder}/RestaurantQueueSystem/QueueSystem/QueueSystem.cpp",
                 "${workspaceFolder}/ExpressionCalculatorSystem/ExpressionTree/ExpressionTree.cpp",
@@ -81,9 +87,11 @@
                     "-std=c++17",
                     "-g",
                     "-I${workspaceFolder}/Main",
+                    "-I${workspaceFolder}/Main/Function",
                     "-I${workspaceFolder}/RestaurantQueueSystem",
                     "-I${workspaceFolder}/ExpressionCalculatorSystem",
                     "${workspaceFolder}/Main/main.cpp",
+                    "${workspaceFolder}/Main/Function/Function.cpp",
                     "${workspaceFolder}/Main/Menu/Menu.cpp",
                     "${workspaceFolder}/RestaurantQueueSystem/QueueSystem/QueueSystem.cpp",
                     "${workspaceFolder}/ExpressionCalculatorSystem/ExpressionTree/ExpressionTree.cpp",

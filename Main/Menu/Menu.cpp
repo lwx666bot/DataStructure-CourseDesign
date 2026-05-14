@@ -1,9 +1,9 @@
 #include <iostream>
 #include <cstdlib>
-#include <limits>
 #include "Menu.h"
+#include "../Function/Function.h"
 #include "../../RestaurantQueueSystem/QueueSystem/QueueSystem.h"
-#include"../ExpressionCalculatorSystem/ExpressionCalculator/ExpressionCalculator.h"
+#include "../../ExpressionCalculatorSystem/ExpressionCalculator/ExpressionCalculator.h"
 using namespace std;    
 
 //用于暂停终端，显示信息
@@ -11,31 +11,8 @@ void pauseScreen(){
     cout<<endl;
     system("pause");
 }
-//限制只能输入数字
- int getMenuChoice()
-{
-    int choice;
-
-    while (true)
-    {
-        cin >> choice;
-
-        if (cin.fail())
-        {
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
-            cout << "输入错误，请输入数字：";
-            continue;
-        }
-
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        return choice;
-    }
-}
-
 void queueMenu(QueueSystem&qu);
-void calculatorMenu();
+void calculatorMenu(ExpressionCalculator& expr);
 
 void printCalculatorMenu()
 {
@@ -110,7 +87,7 @@ void mainMenu(){
             }
             case 2:{
                 //进入表达式计算器二级菜单，进行表达式计算器相关操作
-                calculatorMenu();
+                calculatorMenu(expr);
                 break;
             }
             default:{
@@ -210,7 +187,7 @@ void queueMenu(QueueSystem&qu)
     }
 }
 
-void calculatorMenu()
+void calculatorMenu(ExpressionCalculator &expr)
 {
     int calculatorchoice;
 
@@ -230,7 +207,8 @@ void calculatorMenu()
             case 1:
             {
                 // 输入中缀表达式
-
+                expr.inputExpression();
+                pauseScreen();
                 break;
             }
 

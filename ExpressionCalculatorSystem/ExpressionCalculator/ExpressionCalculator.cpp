@@ -1,30 +1,9 @@
 #include"ExpressionCalculator.h"
+#include "../../Main/Function/Function.h"
 #include<iostream>
 #include<string>
 #include<fstream>
 using namespace std;
-//输入数字函数
- int getMenuChoice()
-{
-    int choice;
-
-    while (true)
-    {
-        cin >> choice;
-
-        if (cin.fail())
-        {
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
-            cout << "输入错误，请输入数字：";
-            continue;
-        }
-
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        return choice;
-    }
-}
 
 bool ExpressionCalculator::setExpression(const string&str){
     infixExpr=str;

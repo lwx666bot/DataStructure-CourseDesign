@@ -5,20 +5,9 @@
 #include <sstream>
 #include <fstream>
 #include "QueueSystem.h"
+#include "../../Main/Function/Function.h"
 using namespace std;
-//时间转换函数
-//将时间戳转成年月日时分秒string类型
-string timeToString(time_t t)
-{
-    if (t == 0)
-    {
-        return "未记录";//初始化和撤销叫号，endtime都会赋值为 0
-    }
-    tm* localTime = localtime(&t);//tm 结构体
-    stringstream ss;
-    ss << put_time(localTime, "%Y-%m-%d %H:%M:%S");//拼接成一个 string 类型
-    return ss.str();
-}
+
 //判断队列是否为空
 bool QueueSystem::empty(){
     return front==rear;
