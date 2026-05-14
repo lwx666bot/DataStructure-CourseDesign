@@ -129,18 +129,23 @@ void QueueSystem::CancelCall(){
     Customer a;
     a=stk.top();
     int search=a.queueNumber-1;
-    if(search<0||search>=historyRecords.size()){
+    if(search<0||search>=(int)historyRecords.size()){
          cout<<"历史记录中未找到该顾客";
-        cout<<"叫号失败";
+        cout<<"撤销叫号失败";
         return;
-    }else{stk.pop();}
-    historyRecords[search].endtime=0;
-    historyRecords[search].CustomerStatus="排队中";
+    }
     a.endtime=0;
     a.CustomerStatus="排队中";
-    push(a);
-    cout<<"撤销叫号成功";
-    cout<<"顾客"<<a.name<<"已重新入队";
+    if(push(a)){
+        historyRecords[search].endtime=0;
+        historyRecords[search].CustomerStatus="排队中";
+        stk.pop();
+        cout<<"撤销叫号成功";
+        cout<<"顾客"<<a.name<<"已重新入队";
+    }else{
+        cout<<"当前队列已满，无法撤销。";
+    }
+    
 }
 
 void QueueSystem::ClearQueue(){
