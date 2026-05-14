@@ -5,7 +5,7 @@
             "name": "编译并运行整个C++项目",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/main",
+            "program": "${workspaceFolder}/build/main",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
@@ -13,15 +13,15 @@
             "externalConsole": true,
             "MIMode": "lldb",
             "windows": {
-                "program": "${workspaceFolder}/main.exe",
+                "program": "${workspaceFolder}/build/main.exe",
                 "MIMode": "gdb",
                 "miDebuggerPath": "C:\\mingw64\\bin\\gdb.exe"
             },
             "osx": {
-                "program": "${workspaceFolder}/main",
+                "program": "${workspaceFolder}/build/main",
                 "MIMode": "lldb"
             },
-            "preLaunchTask": "build-all-cpp"
+            "preLaunchTask": "C/C++: clang++ 生成整个项目"
         }
     ]
 }

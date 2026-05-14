@@ -227,7 +227,7 @@ string QueueSystem::createHistoryFileName(){
     time_t now = time(nullptr);
     tm* localTime = localtime(&now);
     stringstream ss;
-    ss << put_time(localTime, "HistoryRecords/history_%Y-%m-%d_%H-%M-%S.csv");
+    ss << put_time(localTime, "RestaurantQueueSystem/HistoryRecords/history_%Y-%m-%d_%H-%M-%S.csv");
     //这里也可以修改后缀为csv，输出更像表格的csv文件
     return ss.str();
 }

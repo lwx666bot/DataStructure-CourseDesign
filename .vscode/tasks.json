@@ -3,16 +3,67 @@
     "tasks": [
         {
             "type": "shell",
+            "label": "prepare-build-dir",
+            "command": "mkdir",
+            "args": [
+                "-p",
+                "${workspaceFolder}/build"
+            ],
+            "windows": {
+                "command": "cmd",
+                "args": [
+                    "/c",
+                    "if not exist \"${workspaceFolder}\\build\" mkdir \"${workspaceFolder}\\build\""
+                ]
+            },
+            "problemMatcher": []
+        },
+        {
+            "type": "cppbuild",
+            "label": "C/C++: clang++ 生成整个项目",
+            "command": "/usr/bin/clang++",
+            "dependsOn": "prepare-build-dir",
+            "args": [
+                "-fcolor-diagnostics",
+                "-fansi-escape-codes",
+                "-std=c++17",
+                "-g",
+                "-I${workspaceFolder}/Main1",
+                "-I${workspaceFolder}/RestaurantQueueSystem",
+                "${workspaceFolder}/Main1/main.cpp",
+                "${workspaceFolder}/Main1/Menu/Menu.cpp",
+                "${workspaceFolder}/RestaurantQueueSystem/QueueSystem/QueueSystem.cpp",
+                "-o",
+                "${workspaceFolder}/build/main"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "使用 clang++ 编译整个课程设计项目。"
+        },
+        {
+            "type": "shell",
             "label": "build-all-cpp",
-            "command": "g++",
+            "command": "clang++",
+            "dependsOn": "prepare-build-dir",
             "args": [
                 "-fdiagnostics-color=always",
+                "-std=c++17",
                 "-g",
-                "${workspaceFolder}/main.cpp",
-                "${workspaceFolder}/Menu/Menu.cpp",
-                "${workspaceFolder}/QueueSystem/QueueSystem.cpp",
+                "-I${workspaceFolder}/Main1",
+                "-I${workspaceFolder}/RestaurantQueueSystem",
+                "${workspaceFolder}/Main1/main.cpp",
+                "${workspaceFolder}/Main1/Menu/Menu.cpp",
+                "${workspaceFolder}/RestaurantQueueSystem/QueueSystem/QueueSystem.cpp",
                 "-o",
-                "${workspaceFolder}/main"
+                "${workspaceFolder}/build/main"
             ],
             "options": {
                 "cwd": "${workspaceFolder}"
@@ -21,12 +72,15 @@
                 "command": "C:\\mingw64\\bin\\g++.exe",
                 "args": [
                     "-fdiagnostics-color=always",
+                    "-std=c++17",
                     "-g",
-                    "${workspaceFolder}/main.cpp",
-                    "${workspaceFolder}/Menu/Menu.cpp",
-                    "${workspaceFolder}/QueueSystem/QueueSystem.cpp",
+                    "-I${workspaceFolder}/Main1",
+                    "-I${workspaceFolder}/RestaurantQueueSystem",
+                    "${workspaceFolder}/Main1/main.cpp",
+                    "${workspaceFolder}/Main1/Menu/Menu.cpp",
+                    "${workspaceFolder}/RestaurantQueueSystem/QueueSystem/QueueSystem.cpp",
                     "-o",
-                    "${workspaceFolder}/main.exe"
+                    "${workspaceFolder}/build/main.exe"
                 ],
                 "options": {
                     "shell": {
@@ -38,25 +92,10 @@
                     "cwd": "${workspaceFolder}"
                 }
             },
-            "osx": {
-                "command": "g++",
-                "args": [
-                    "-fdiagnostics-color=always",
-                    "-g",
-                    "${workspaceFolder}/main.cpp",
-                    "${workspaceFolder}/Menu/Menu.cpp",
-                    "${workspaceFolder}/QueueSystem/QueueSystem.cpp",
-                    "-o",
-                    "${workspaceFolder}/main"
-                ]
-            },
             "problemMatcher": [
                 "$gcc"
             ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
+            "group": "build"
         }
     ]
 }

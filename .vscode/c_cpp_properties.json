@@ -1,0 +1,35 @@
+{
+    "configurations": [
+        {
+            "name": "Mac",
+            "includePath": [
+                "${workspaceFolder}/Main1",
+                "${workspaceFolder}/RestaurantQueueSystem",
+                "${workspaceFolder}/RestaurantQueueSystem/Customer",
+                "${workspaceFolder}/RestaurantQueueSystem/QueueSystem"
+            ],
+            "defines": [],
+            "macFrameworkPath": [
+                "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks"
+            ],
+            "compilerPath": "/usr/bin/clang++",
+            "cStandard": "c17",
+            "cppStandard": "c++17"
+        },
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceFolder}/Main1",
+                "${workspaceFolder}/RestaurantQueueSystem",
+                "${workspaceFolder}/RestaurantQueueSystem/Customer",
+                "${workspaceFolder}/RestaurantQueueSystem/QueueSystem"
+            ],
+            "defines": [],
+            "compilerPath": "C:/mingw64/bin/g++.exe",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "windows-gcc-x64"
+        }
+    ],
+    "version": 4
+}
