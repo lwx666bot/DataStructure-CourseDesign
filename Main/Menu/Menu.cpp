@@ -22,11 +22,16 @@ void printCalculatorMenu()
     cout << "             表达式计算器系统" << endl;
     cout << "========================================" << endl;
     cout << "1. 输入中缀表达式" << endl;
-    cout << "2. 中缀表达式转后缀表达式" << endl;
-    cout << "3. 计算后缀表达式" << endl;
-    cout << "4. 直接计算表达式结果" << endl;
-    cout << "5. 查看表达式计算过程" << endl;
-    cout << "6. 清空当前表达式" << endl;
+    cout << "2. 求前缀和后缀表达式" << endl;
+    cout << "3. 基于中缀和后缀表达式求值" << endl;
+    cout << "4. 基于表达式树求值" << endl;
+    cout << "5. 表达式树可视化" << endl;
+    cout << "6. 显示表达式结果" << endl;
+    cout << "7. 保存表达式结果到文件" << endl;
+    cout << "8. 查看计算历史" << endl;
+    cout << "9. 清空计算历史" << endl;
+    cout << "10. 清空当前表达式" << endl;
+    cout << "11. 算法功能演示" << endl;
     cout << "0. 返回主菜单" << endl;
     cout << "========================================" << endl;
     cout << "请输入你的选择：";
@@ -75,6 +80,12 @@ void mainMenu(){
                     cout<<"退出系统前，信息已自动保存"<<endl;
                 }else{
                     cout<<"本次运行无排队历史记录，无需保存"<<endl;
+                }
+                if(expr.hasHistoryRecords()){
+                    expr.SaveResultToFile();
+                    cout<<"退出系统前，表达式计算历史已自动保存"<<endl;
+                }else{
+                    cout<<"本次运行无表达式计算历史记录，无需保存"<<endl;
                 }
                 cout<<"退出系统...";
                 return;
@@ -207,38 +218,90 @@ void calculatorMenu(ExpressionCalculator &expr)
             case 1:
             {
                 // 输入中缀表达式
-                expr.inputExpression();
+                expr.InputExpression();
                 pauseScreen();
                 break;
             }
 
             case 2:
             {
-                // 中缀表达式转后缀表达式
+                // 求前缀和后缀表达式
+                expr.InfixToPost();
+                expr.InfixToPre();
+                pauseScreen();
                 break;
             }
 
             case 3:
             {
-                // 计算后缀表达式
+                // 基于中缀和后缀表达式求值
+                expr.GetInfixValue();
+                expr.GetPostValue();
+                pauseScreen();
                 break;
             }
 
             case 4:
             {
-                // 直接计算表达式结果
+                // 基于表达式树求值
+                expr.GetTreeValue();
+                pauseScreen();
                 break;
             }
 
             case 5:
             {
-                // 查看表达式计算过程
+                // 表达式树可视化
+                expr.DispExpressionTree();
+                pauseScreen();
                 break;
             }
 
             case 6:
             {
+                // 显示表达式结果
+                expr.DispResult();
+                pauseScreen();
+                break;
+            }
+
+            case 7:
+            {
+                // 保存表达式结果到文件
+                expr.SaveResultToFile();
+                pauseScreen();
+                break;
+            }
+
+            case 8:
+            {
+                // 查看计算历史
+                expr.DispHistory();
+                pauseScreen();
+                break;
+            }
+
+            case 9:
+            {
+                // 清空计算历史
+                expr.ClearHistory();
+                pauseScreen();
+                break;
+            }
+
+            case 10:
+            {
                 // 清空当前表达式
+                expr.ClearExpression();
+                pauseScreen();
+                break;
+            }
+
+            case 11:
+            {
+                // 算法功能演示
+                expr.ShowAlgorithm();
+                pauseScreen();
                 break;
             }
 
