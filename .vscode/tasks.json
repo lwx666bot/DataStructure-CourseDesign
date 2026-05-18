@@ -43,6 +43,26 @@
             "windows": {
                 "command": "C:\\mingw64\\bin\\g++.exe"
             },
+            "osx": {
+                "command": "g++",
+                "args": [
+                    "-fdiagnostics-color=always",
+                    "-std=c++17",
+                    "-g",
+                    "-I${workspaceFolder}/Main",
+                    "-I${workspaceFolder}/Main/Function",
+                    "-I${workspaceFolder}/RestaurantQueueSystem",
+                    "-I${workspaceFolder}/ExpressionCalculatorSystem",
+                    "${workspaceFolder}/Main/main.cpp",
+                    "${workspaceFolder}/Main/Function/Function.cpp",
+                    "${workspaceFolder}/Main/Menu/Menu.cpp",
+                    "${workspaceFolder}/RestaurantQueueSystem/QueueSystem/QueueSystem.cpp",
+                    "${workspaceFolder}/ExpressionCalculatorSystem/ExpressionTree/ExpressionTree.cpp",
+                    "${workspaceFolder}/ExpressionCalculatorSystem/ExpressionCalculator/ExpressionCalculator.cpp",
+                    "-o",
+                    "${workspaceFolder}/build/main"
+                ]
+            },
             "options": {
                 "cwd": "${workspaceFolder}"
             },

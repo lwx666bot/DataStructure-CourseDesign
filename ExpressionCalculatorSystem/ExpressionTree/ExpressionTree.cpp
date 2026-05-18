@@ -1,7 +1,7 @@
-#include"ExpressionTree.h"
-#include<iostream>
-#include<sstream>
-#include<stack>
+#include "ExpressionTree.h"
+#include <iostream>
+#include <sstream>
+#include <stack>
 using namespace std;
 
 ExpressionTree::~ExpressionTree(){

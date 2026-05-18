@@ -1,7 +1,7 @@
 #ifndef EXPRESSIONTREE_H
 #define EXPRESSIONTREE_H
-#include"ExpressionTreeNode.h"
-#include<string>
+#include "ExpressionTreeNode.h"
+#include <string>
 using namespace std;
 class ExpressionTree{
     ExpressionTreeNode*r;

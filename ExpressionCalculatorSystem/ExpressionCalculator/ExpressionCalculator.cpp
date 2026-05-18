@@ -1,12 +1,12 @@
-#include"ExpressionCalculator.h"
+#include "ExpressionCalculator.h"
 #include "../../Main/Function/Function.h"
-#include<iostream>
-#include<string>
-#include<fstream>
-#include<stack>
-#include<vector>
-#include<sstream>
-#include<iomanip>
+#include <iostream>
+#include <string>
+#include <fstream>
+#include <stack>
+#include <vector>
+#include <sstream>
+#include <iomanip>
 using namespace std;
 
 ExpressionCalculator::ExpressionCalculator(){
@@ -49,7 +49,7 @@ bool ExpressionCalculator::SetExpression(const string&str){
     hasResult=false;
     tree.ClearTree();
 
-    if(!AutoMakeExpression()){
+    if(!autoMakeExpression()){
         infixExpr=oldExpr;
         postExpr=oldPostExpr;
         preExpr=oldPreExpr;
@@ -113,7 +113,7 @@ void ExpressionCalculator::InputFromFile(){
     }
 }
 
-bool ExpressionCalculator::AutoMakeExpression(){
+bool ExpressionCalculator::autoMakeExpression(){
     stack<char>optr;
     postExpr="";
     preExpr="";

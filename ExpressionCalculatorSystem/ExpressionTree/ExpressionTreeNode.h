@@ -1,6 +1,6 @@
 #ifndef EXPRESSIONTREENODE_H
 #define EXPRESSIONTREENODE_H
-#include<string>
+#include <string>
 using namespace std;
 struct ExpressionTreeNode{
     string data;

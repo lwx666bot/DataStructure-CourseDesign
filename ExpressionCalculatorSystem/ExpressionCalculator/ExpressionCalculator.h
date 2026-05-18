@@ -1,8 +1,8 @@
 #ifndef EXPRESSIONCALCULATOR_H
 #define EXPRESSIONCALCULATOR_H
-#include"../ExpressionTree/ExpressionTree.h"
-#include<string>
-#include<vector>
+#include "../ExpressionTree/ExpressionTree.h"
+#include <string>
+#include <vector>
 using namespace std;
 class ExpressionCalculator{
     private:
@@ -50,7 +50,7 @@ class ExpressionCalculator{
     int getPriority(char op) const;
     double operate(double a,char op,double b);
     void addHistory();
-    bool AutoMakeExpression();//输入后自动计算，不输出过程
+    bool autoMakeExpression();//输入后自动计算，不输出过程
 };
 
 #endif
