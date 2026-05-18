@@ -24,6 +24,7 @@ class ExpressionCalculator{
     void inputExpression();
     void inputFromKeyboard();
     void inputFromFile();
+    bool isValidexpression();
 };
 
 #endif

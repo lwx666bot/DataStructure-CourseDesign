@@ -69,7 +69,7 @@ void mainMenu(){
         printMainMenu();
         choice = getMenuChoice();
         switch(choice){
-            case 0:{//这里自动保存退出系统时，已经存储的信息
+            case 0:{//这里自动保存退出系统时，队列已经存储的信息
                 if(qu.hasHistoryRecords()){
                     qu.SaveHistoryToFile();
                     cout<<"退出系统前，信息已自动保存"<<endl;

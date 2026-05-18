@@ -56,7 +56,9 @@ void ExpressionCalculator::inputFromFile(){
     setExpression(new_expr);
 }
 
-
+bool ExpressionCalculator::isValidexpression(){
+    
+}
 
 
 
